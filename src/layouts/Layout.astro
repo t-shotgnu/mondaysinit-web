@@ -1,0 +1,347 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Monday InIT - Wydarzenie IT organizowane przez EKA.NET i Kredek na Politechnice Wrocławskiej."
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-content container">
+        <div class="logo">Monday <span>InIT</span></div>
+        <ul class="nav-links">
+          <li><a href="#home">Strona Główna</a></li>
+          <li><a href="#speakers">Prelegenci</a></li>
+          <li><a href="#agenda">Agenda</a></li>
+          <li><a href="#about">Organizatorzy</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="#register" class="cta-nav">Zarejestruj się</a>
+          <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <div class="container text-center">
+        <p>
+          &copy; {new Date().getFullYear()} Monday InIT. Wszystkie prawa zastrzeżone.
+        </p>
+        <p class="footer-small">
+          Wydarzenie dla studentów Politechniki Wrocławskiej (EKA.NET i Kredek).
+        </p>
+      </div>
+    </footer>
+
+    <script is:inline>
+      const menuBtn = document.querySelector(".mobile-menu-btn");
+      const navLinks = document.querySelector(".nav-links");
+      const navItems = document.querySelectorAll(".nav-links a");
+
+      if (menuBtn && navLinks) {
+        menuBtn.addEventListener("click", () => {
+          menuBtn.classList.toggle("open");
+          navLinks.classList.toggle("active");
+          document.body.style.overflow = navLinks.classList.contains("active")
+            ? "hidden"
+            : "";
+        });
+
+        navItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            menuBtn.classList.remove("open");
+            navLinks.classList.remove("active");
+            document.body.style.overflow = "";
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg-color: #0b0f19;
+    --surface-color: #1a2235;
+    --surface-color-light: #252f44;
+    --primary: #9d4edd;
+    --secondary: #ff006e;
+    --accent: #3a86ff;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --font-heading: "Outfit", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --gradient-primary: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--secondary) 100%
+    );
+    --gradient-cool: linear-gradient(
+      135deg,
+      var(--primary) 0%,
+      var(--accent) 100%
+    );
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    margin-top: 0;
+    line-height: 1.2;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  section {
+    padding: 6rem 0;
+    position: relative;
+  }
+
+  .section-title {
+    font-size: 2.8rem;
+    text-align: center;
+    margin-bottom: 4rem;
+    background: var(--gradient-cool);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+  }
+
+  .logo {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .logo span {
+    color: var(--primary);
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-muted);
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-main);
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .cta-nav {
+    background: var(--gradient-primary);
+    padding: 0.7rem 1.8rem;
+    border-radius: 999px;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+  }
+
+  .cta-nav:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 0, 110, 0.4);
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    position: relative;
+  }
+
+  .mobile-menu-btn span {
+    width: 100%;
+    height: 2px;
+    background: var(--text-main);
+    border-radius: 2px;
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+    display: block;
+    position: absolute;
+    left: 0;
+    transform-origin: center;
+  }
+
+  .mobile-menu-btn span:nth-child(1) {
+    top: 6px;
+  }
+  .mobile-menu-btn span:nth-child(2) {
+    top: 14px;
+  }
+  .mobile-menu-btn span:nth-child(3) {
+    top: 22px;
+  }
+
+  .mobile-menu-btn.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .mobile-menu-btn.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .mobile-menu-btn.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  footer {
+    background-color: #05080e;
+    padding: 4rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .footer-small {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .nav-content {
+      padding: 0 0.5rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(11, 15, 25, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      gap: 3rem;
+    }
+
+    .nav-links.active {
+      right: 0;
+    }
+
+    .nav-links a {
+      font-size: 1.5rem;
+      font-family: var(--font-heading);
+    }
+
+    .nav-actions {
+      gap: 1rem;
+    }
+
+    .cta-nav {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>
