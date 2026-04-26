@@ -1,4 +1,6 @@
 ---
+import wordmark from "../assets/wordmark-MONDAYSinit_light.svg";
+
 interface Props {
   title: string;
 }
@@ -26,11 +28,13 @@ const { title } = Astro.props;
   <body>
     <nav class="navbar">
       <div class="nav-content container">
-        <div class="logo">Monday <span>InIT</span></div>
+        <a href="#home" class="logo-link">
+          <img src={wordmark.src} alt="Mondays InIT" class="nav-logo" />
+        </a>
         <ul class="nav-links">
           <li><a href="#home">Strona Główna</a></li>
-          <li><a href="#speakers">Prelegenci</a></li>
-          <li><a href="#agenda">Agenda</a></li>
+          <li><a href="#prelekcje">Prelekcje</a></li>
+          <li><a href="#opis">Opis</a></li>
           <li><a href="#about">Organizatorzy</a></li>
         </ul>
         <div class="nav-actions">
@@ -85,12 +89,12 @@ const { title } = Astro.props;
 
 <style is:global>
   :root {
-    --bg-color: #0b0f19;
-    --surface-color: #1a2235;
-    --surface-color-light: #252f44;
-    --primary: #9d4edd;
-    --secondary: #ff006e;
-    --accent: #3a86ff;
+    --bg-color: #0b1120;
+    --surface-color: #1e293b;
+    --surface-color-light: #334155;
+    --primary: #2563eb;
+    --secondary: #0ea5e9;
+    --accent: #38bdf8;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
     --font-heading: "Outfit", sans-serif;
@@ -102,7 +106,7 @@ const { title } = Astro.props;
     );
     --gradient-cool: linear-gradient(
       135deg,
-      var(--primary) 0%,
+      var(--secondary) 0%,
       var(--accent) 100%
     );
   }
@@ -173,7 +177,7 @@ const { title } = Astro.props;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(11, 15, 25, 0.75);
+    background: rgba(11, 17, 32, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 1000;
@@ -187,15 +191,14 @@ const { title } = Astro.props;
     height: 80px;
   }
 
-  .logo {
-    font-family: var(--font-heading);
-    font-size: 1.8rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
+  .logo-link {
+    display: flex;
+    align-items: center;
   }
 
-  .logo span {
-    color: var(--primary);
+  .nav-logo {
+    height: 48px;
+    width: auto;
   }
 
   .nav-links {
@@ -235,7 +238,7 @@ const { title } = Astro.props;
 
   .cta-nav:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 0, 110, 0.4);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
   }
 
   .mobile-menu-btn {
@@ -315,7 +318,7 @@ const { title } = Astro.props;
       right: -100%;
       width: 100vw;
       height: 100vh;
-      background: rgba(11, 15, 25, 0.97);
+      background: rgba(11, 17, 32, 0.97);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       flex-direction: column;
