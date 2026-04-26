@@ -294,12 +294,6 @@
       transform 0.3s ease,
       box-shadow 0.3s ease;
   }
-
-  .about-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-  }
-
   .about-card::before {
     content: "";
     position: absolute;
@@ -310,16 +304,29 @@
   }
 
   .eka::before {
-    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+    background: linear-gradient(90deg, #578bfa, #1d4ed8);
   }
 
   .kredek::before {
-    background: linear-gradient(90deg, #0ea5e9, #0284c7);
+    background: linear-gradient(90deg, #e98a0e, #f72703);
+  }
+
+  .about-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .about-header h3 {
     font-size: 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .organizer-logo {
+    height: 48px;
+    width: auto;
   }
 
   .about-card p {
