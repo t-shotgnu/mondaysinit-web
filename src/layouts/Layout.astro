@@ -1,5 +1,6 @@
 ---
 import wordmark from "../assets/wordmark-MONDAYSinit_light.svg";
+import logomark from "../assets/logomark-MONDAYSinit_light.svg";
 
 interface Props {
   title: string;
@@ -17,6 +18,7 @@ const { title } = Astro.props;
       content="Monday InIT - Wydarzenie IT organizowane przez EKA.NET i Kredek na Politechnice Wrocławskiej."
     />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={logomark.src} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
