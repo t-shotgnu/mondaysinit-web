@@ -169,12 +169,27 @@
   /* Agenda Section */
   .agenda-section {
     background-color: var(--bg-color);
+    position: relative;
+  }
+
+  .agenda-section::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.05) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
   }
 
   .timeline {
     max-width: 800px;
     margin: 0 auto;
     position: relative;
+    z-index: 1;
   }
 
   .timeline::before {
@@ -187,15 +202,17 @@
     background: linear-gradient(
       to bottom,
       transparent,
-      rgba(37, 99, 235, 0.3) 10%,
-      rgba(37, 99, 235, 0.3) 90%,
+      rgba(37, 99, 235, 0.6) 10%,
+      rgba(14, 165, 233, 0.6) 50%,
+      rgba(37, 99, 235, 0.6) 90%,
       transparent
     );
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
   }
 
   .timeline-item {
     display: flex;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     position: relative;
   }
 
@@ -206,70 +223,124 @@
   .timeline-item::after {
     content: "";
     position: absolute;
-    left: 115px;
+    left: 111px;
     top: 5px;
-    width: 12px;
-    height: 12px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: var(--bg-color);
-    border: 2px solid var(--accent);
+    border: 3px solid var(--accent);
     z-index: 2;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-sizing: border-box;
   }
 
   .timeline-item:hover::after {
     background: var(--accent);
-    box-shadow: 0 0 15px var(--accent);
+    box-shadow: 0 0 20px 5px rgba(14, 165, 233, 0.4);
   }
 
   .time {
     width: 120px;
     padding-right: 2rem;
-    font-weight: 700;
-    color: var(--accent);
+    font-weight: 800;
+    color: transparent;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    background-clip: text;
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-item:hover .time {
+    /* usunięto przesunięcie przy hoverze */
   }
 
   .content {
     flex: 1;
-    padding-left: 3rem;
-    background: rgba(255, 255, 255, 0.02);
-    padding: 1.5rem 2rem;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    transition: transform 0.3s ease;
+    margin-left: 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+    pointer-events: none;
   }
 
   .timeline-item:hover .content {
-    transform: translateX(5px);
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.3);
+  }
+
+  .timeline-item:hover .content::before {
+    opacity: 1;
+  }
+
+  .content > * {
+    position: relative;
+    z-index: 1;
   }
 
   .content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-main);
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: #f8fafc;
+    font-weight: 700;
+    letter-spacing: -0.5px;
   }
 
   .content p {
-    color: var(--text-muted);
+    color: #94a3b8;
     margin: 0;
+    line-height: 1.7;
+    font-size: 1.05rem;
+  }
+
+  .content p strong {
+    color: #e2e8f0;
+    font-weight: 600;
   }
 
   .timeline-item.break .content {
     background: transparent;
-    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .timeline-item.break:hover .content {
+    border-color: rgba(14, 165, 233, 0.4);
+    background: rgba(14, 165, 233, 0.02);
   }
 
   .timeline-item.break .content h3 {
-    color: var(--text-muted);
-    font-weight: 500;
+    color: #94a3b8;
   }
 
   .timeline-item.break::after {
-    border-color: var(--text-muted);
+    border-color: #475569;
   }
 
   /* About Section */
@@ -359,20 +430,23 @@
     }
     .timeline-item {
       flex-direction: column;
+      margin-bottom: 3rem;
     }
     .timeline-item::after {
-      left: 11px;
-      top: 0;
+      left: 7px;
+      top: 2px;
     }
     .time {
       width: auto;
       padding-right: 0;
       margin-bottom: 1rem;
-      padding-left: 2.5rem;
+      padding-left: 3rem;
+    }
+    .timeline-item:hover .time {
+      /* usunięto przesunięcie przy hoverze */
     }
     .content {
-      padding-left: 2rem;
-      margin-left: 16px;
-      border-left: none;
+      margin-left: 3rem;
+      padding: 1.25rem;
     }
   }
