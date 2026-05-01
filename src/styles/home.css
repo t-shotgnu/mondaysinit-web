@@ -397,7 +397,8 @@
 
   .organizer-logo {
     height: 48px;
-    width: auto;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .about-card p {
@@ -424,29 +425,32 @@
     .about-grid {
       grid-template-columns: 1fr;
     }
+    .about-card {
+      padding: 2rem 1.5rem;
+    }
 
     .timeline::before {
-      left: 16px;
+      left: 12px;
     }
     .timeline-item {
       flex-direction: column;
       margin-bottom: 3rem;
     }
     .timeline-item::after {
-      left: 7px;
+      left: 3px;
       top: 2px;
     }
     .time {
       width: auto;
       padding-right: 0;
-      margin-bottom: 1rem;
-      padding-left: 3rem;
+      margin-bottom: 0.5rem;
+      padding-left: 2.5rem;
     }
     .timeline-item:hover .time {
       /* usunięto przesunięcie przy hoverze */
     }
     .content {
-      margin-left: 3rem;
-      padding: 1.25rem;
+      margin-left: 2.25rem;
+      padding: 1rem;
     }
   }
