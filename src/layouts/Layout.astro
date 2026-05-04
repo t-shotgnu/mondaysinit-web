@@ -40,7 +40,7 @@ const { title } = Astro.props;
           <li><a href="#about">Organizatorzy</a></li>
         </ul>
         <div class="nav-actions">
-          <a href="#register" class="cta-nav">Zarejestruj się</a>
+          <!-- <a href="#register" class="cta-nav">Zarejestruj się</a> -->
           <button class="mobile-menu-btn" aria-label="Toggle menu">
             <span></span>
             <span></span>
@@ -97,10 +97,12 @@ const { title } = Astro.props;
     --primary: #2563eb;
     --secondary: #0ea5e9;
     --accent: #38bdf8;
+    --monday-yellow: #febf3d;
+    --monday-primary: #febf3d;
     --text-main: #f8fafc;
     --text-muted: #94a3b8;
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Space Grotesk', sans-serif;
+    --font-heading: "Outfit", sans-serif;
+    --font-body: "Space Grotesk", sans-serif;
     --gradient-primary: linear-gradient(
       135deg,
       var(--primary) 0%,
@@ -126,6 +128,10 @@ const { title } = Astro.props;
     margin: 0;
     font-family: var(--font-body);
     background-color: var(--bg-color);
+    background-image: url("../assets/background.svg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
@@ -174,9 +180,7 @@ const { title } = Astro.props;
     font-size: 2.8rem;
     text-align: center;
     margin-bottom: 4rem;
-    background: var(--gradient-cool);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--monday-primary);
     font-weight: 800;
   }
 
