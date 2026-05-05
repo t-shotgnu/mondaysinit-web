@@ -1,39 +1,60 @@
 ---
+const mainCoordinators = [
+  {
+    name: "Łukasz Czerwiński",
+    role: "Koordynator Główny",
+    org: "KN Kredek",
+    avatarClass: "kredek-avatar",
+  },
+  {
+    name: "Filip Kwiek",
+    role: "Koordynator ds. Współpracy Zewnętrznej",
+    org: "KN EKA.NET",
+    avatarClass: "eka-avatar",
+  },
+];
+
 const coordinators = [
-  {
-    name: "Osoba z EKA.NET",
-    role: "Koordynator / EKA.NET",
-    avatarClass: "eka-avatar",
-  },
-  {
-    name: "Osoba z EKA.NET",
-    role: "Koordynator / EKA.NET",
-    avatarClass: "eka-avatar",
-  },
-  {
-    name: "Osoba z Kredek",
-    role: "Koordynator / Kredek",
-    avatarClass: "kredek-avatar",
-  },
-  {
-    name: "Osoba z Kredek",
-    role: "Koordynator / Kredek",
-    avatarClass: "kredek-avatar",
-  },
+  { name: "Emilia Morawska", role: "Koordynator ds. Grafiki", org: "KN Kredek", avatarClass: "kredek-avatar" },
+  { name: "Oskar Witek", role: "Koordynator ds. Zamówień", org: "KN Kredek", avatarClass: "kredek-avatar" },
+  { name: "Michał Puchyr", role: "Koordynator ds. Informatyzacji", org: "KN EKA.NET", avatarClass: "eka-avatar" },
+  { name: "Faustyna Olszewska", role: "Koordynator ds. Grafiki", org: "KN EKA.NET", avatarClass: "eka-avatar" },
+  { name: "Franciszek Wojnowski", role: "Koordynator ds. Finansów", org: "KN Kredek", avatarClass: "kredek-avatar" },
+  { name: "Miłosz Jakóbik", role: "Koordynator ds. Zamówień", org: "KN EKA.NET", avatarClass: "eka-avatar" },
+  { name: "Daria Handke", role: "Koordynator ds. Fotorelacji", org: "KN EKA.NET", avatarClass: "eka-avatar" },
+  { name: "Nadia Gill", role: "Koordynator", org: "KN Kredek", avatarClass: "kredek-avatar" },
+  { name: "Aleksander Żołnowski", role: "Koordynator", org: "KN EKA.NET", avatarClass: "eka-avatar" },
+  { name: "Kamil Jasyk", role: "Koordynator", org: "KN Kredek", avatarClass: "kredek-avatar" },
+  { name: "Grzegorz Dynak", role: "Koordynator", org: "KN EKA.NET", avatarClass: "eka-avatar" },
 ];
 ---
 
 <section id="coordinators" class="coordinators-section">
   <div class="container">
-    <h2 class="section-title">Koordynatorzy</h2>
+    <div class="coordinators-grid principal-grid">
+      {
+        mainCoordinators.map((coordinator) => (
+          <div class="coordinator-card main-card">
+            <!-- <div class={`avatar ${coordinator.avatarClass}`} /> -->
+            <div class="info">
+              <h3>{coordinator.name}</h3>
+              <p class="role">{coordinator.role}</p>
+              <p class="org">{coordinator.org}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
     <div class="coordinators-grid">
       {
         coordinators.map((coordinator) => (
           <div class="coordinator-card">
-            <div class={`avatar ${coordinator.avatarClass}`} />
+            <!-- <div class={`avatar ${coordinator.avatarClass}`} /> -->
             <div class="info">
               <h3>{coordinator.name}</h3>
-              <p>{coordinator.role}</p>
+              <p class="role">{coordinator.role}</p>
+              <p class="org">{coordinator.org}</p>
             </div>
           </div>
         ))
@@ -57,13 +78,18 @@ const coordinators = [
     margin: 0 auto;
   }
 
+  .principal-grid {
+    max-width: 650px;
+    margin-bottom: 3.5rem;
+  }
+
   .coordinator-card {
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
-    padding: 2rem;
+    padding: 1.25rem;
     text-align: center;
     transition:
       transform 0.3s ease,
@@ -109,8 +135,15 @@ const coordinators = [
     color: var(--text-main);
   }
 
-  .info p {
+  .info .role {
     font-size: 0.95rem;
+    color: var(--primary-light);
+    margin: 0 0 0.25rem 0;
+    font-weight: 500;
+  }
+
+  .info .org {
+    font-size: 0.85rem;
     color: var(--text-muted);
     margin: 0;
   }
