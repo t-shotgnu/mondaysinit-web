@@ -379,12 +379,16 @@
   @media (max-width: 900px) {
     .hero-logo-container {
       gap: 1rem;
+      width: 80%;
+      margin-inline: auto;
+      width: 100%;
     }
     .hero-logomark-inline {
       height: 56px;
     }
     .hero-wordmark {
-      height: 44px;
+      margin-inline: 1rem;
+      width: 100%;
     }
     .hero-details {
       flex-direction: column;
@@ -421,5 +425,27 @@
     .content {
       margin-left: 2.25rem;
       padding: 1rem;
+    }
+
+    .hero-actions {
+      width: 100%;
+      padding: 0 1rem;
+    }
+    
+    .hero-actions div {
+      flex-direction: column !important;
+      width: 100%;
+      gap: 1rem !important;
+      align-items: center;
+    }
+    
+    .btn-primary, .btn-outline {
+      width: 100%;
+      max-width: 320px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
   }
