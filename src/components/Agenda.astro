@@ -1,15 +1,21 @@
 ---
 import ekaLogo from "../assets/eka_net_logo.svg";
 import xebiaLogo from "../assets/Xebia_Logo_0.svg";
+import capgeminiLogo from "../assets/capgemini_logo.svg";
+import cuttingEdgeLogo from "../assets/cutting_edge_logo.png";
 
 const presentations = [
   {
     date: "11 Maja 2026",
     time: "18:00",
     title: "Tworzenie aplikacji w Blazorze",
-    logoSrc: ekaLogo.src,
-    logoAlt: "EKA.NET Logo",
-    logoStyle: "height: 32px; width: auto; opacity: 0.9; flex-shrink: 0;",
+    logos: [
+      {
+        src: ekaLogo.src,
+        alt: "EKA.NET Logo",
+        style: "height: 32px; width: auto; opacity: 0.9; flex-shrink: 0;",
+      },
+    ],
     location: "s. D1.2 C-16 PWr",
     speaker: "<strong>Filip Kwiek</strong>, prezes Koła Naukowego EKA.NET",
     description: `Nasz cykl rozpoczniemy warsztatami od EKA.NET - jednego z naszych organizatorów, którzy pokażą jak napisać frontend z pomocą... C#!<br /><br />Ucząc się C# i powiązanych technologii, wiele usłyszeć można o Blazorze. Dla niektórych jest to kolejne wymyślanie koła na nowo, a dla innych kolejny dziwny pomysł Microsoftu, podobny do silverlight-a, który nie przetrwa dłużej. Jednak wraz ze swoim wejściem w 2018 razem z .NET Core 3.0, do tego momentu działa i jest prężnie rozwijany przez Microsoft.<br /><br />Po co nam kolejny webowy framework UI? Dlaczego to jest dla Nas, jako dotnetowców przydatne? W kilka chwil stworzymy razem Waszą pierwszą aplikację w Blazorze, pobierając dane z portalu Open Data Wrocław oraz poddając je analizie na dwa sposoby.<br /><br />Celem warsztatów jest pokazanie, że nawet dla backendowca nie taki frontend straszny jak go malują. 😇`,
@@ -18,9 +24,13 @@ const presentations = [
     date: "18 Maja 2026",
     time: "18:00",
     title: "Skuteczny dobór architektury aplikacji",
-    logoSrc: xebiaLogo.src,
-    logoAlt: "Xebia Logo",
-    logoStyle: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
+    logos: [
+      {
+        src: xebiaLogo.src,
+        alt: "Xebia Logo",
+        style: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
+      },
+    ],
     location: "s. D1.2 C-16 PWr",
     speaker:
       "<strong>Paweł Muraczewski</strong>, team leader i senior fullstack developer z firmy Xebia!",
@@ -29,13 +39,23 @@ const presentations = [
   {
     date: "25 Maja 2026",
     time: "18:00",
-    title: "Coming soon!",
-    logoSrc: "",
-    logoAlt: "",
-    logoStyle: "",
-    location: "",
-    speaker: "",
-    description: "Kolejne tematy prelekcji podamy już wkrótce!",
+    title: "Świadome użycie AI",
+    logos: [
+      {
+        src: capgeminiLogo.src,
+        alt: "Capgemini Logo",
+        style: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
+      },
+      {
+        src: cuttingEdgeLogo.src,
+        alt: "Cutting Edge Logo",
+        style: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
+      },
+    ],
+    location: "Zdalnie",
+    speaker:
+      "<strong>Krzysztof Korus</strong> z Capgemini, członek Cutting Edge Community",
+    description: `Odkrywamy wszystkie karty na maj!<br /><br />Te warsztaty pokażą Wam, że użycie AI nie zawsze wiąże się z "vibe codingiem". Tutaj dowiecie się m.in. jak świadomie używać AI zarówno w projektach prywatnych jak i komercyjnych oraz jak zarządzać kontekstem narzędzia AI.<br /><br />Poznacie również liczne wskazówki dobrych praktyk pracy z narzędziami takimi jak Github Copilot czy Claude Code. 🤖`,
   },
 ];
 ---
@@ -57,12 +77,16 @@ const presentations = [
                 <h3 style="margin-bottom: 0; flex: 1; min-width: 200px;">
                   {pres.title}
                 </h3>
-                {pres.logoSrc && (
-                  <img
-                    src={pres.logoSrc}
-                    alt={pres.logoAlt}
-                    style={pres.logoStyle}
-                  />
+                {pres.logos && pres.logos.length > 0 && (
+                  <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                    {pres.logos.map((logo) => (
+                      <img
+                        src={logo.src}
+                        alt={logo.alt}
+                        style={logo.style + " max-width: 100%;"}
+                      />
+                    ))}
+                  </div>
                 )}
               </div>
               {pres.location && (
