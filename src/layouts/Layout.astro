@@ -1,6 +1,7 @@
 ---
 import wordmark from "../assets/wordmark-MONDAYSinit_light.svg";
 import logomark from "../assets/logomark-MONDAYSinit_light.svg";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -10,7 +11,7 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="pl">
+<html lang="pl" class="scroll-smooth overflow-x-hidden">
   <head>
     <meta charset="UTF-8" />
     <meta
@@ -27,29 +28,27 @@ const { title } = Astro.props;
     />
     <title>{title}</title>
   </head>
-  <body>
-    <nav class="navbar">
-      <div class="nav-content container">
-        <a href="#home" class="logo-link">
+  <body class="m-0 font-body bg-bg-base text-text-main overflow-x-hidden">
+    <nav class="fixed top-0 left-0 w-full bg-[#0b1120]/75 backdrop-blur-md z-50 border-b border-white/5 md:block hidden" id="main-nav">
+      <div class="flex justify-between items-center h-20 w-full max-w-[1200px] mx-auto px-4 md:px-8">
+        <a href="#home" class="flex items-center">
           <img
             src={logomark.src}
             alt="Mondays InIT"
-            class="nav-logo"
-            style="height: 48px; width: auto;"
+            class="h-12 w-auto"
           />
         </a>
-        <ul class="nav-links">
-          <li><a href="#home">Strona Główna</a></li>
-          <li><a href="#opis">O inicjatywie</a></li>
-          <li><a href="#prelekcje">Prelekcje</a></li>
-          <li><a href="#about">Organizatorzy</a></li>
+        <ul class="flex list-none gap-8 m-0 p-0" id="nav-links">
+          <li><a href="#home" class="font-medium text-base text-text-muted hover:text-text-main transition-colors">Strona Główna</a></li>
+          <li><a href="#opis" class="font-medium text-base text-text-muted hover:text-text-main transition-colors">O inicjatywie</a></li>
+          <li><a href="#prelekcje" class="font-medium text-base text-text-muted hover:text-text-main transition-colors">Prelekcje</a></li>
+          <li><a href="#about" class="font-medium text-base text-text-muted hover:text-text-main transition-colors">Organizatorzy</a></li>
         </ul>
-        <div class="nav-actions">
-          <!-- <a href="#register" class="cta-nav">Zarejestruj się</a> -->
-          <button class="mobile-menu-btn" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="flex items-center gap-6">
+          <button class="md:hidden block w-[30px] h-[30px] bg-transparent border-none cursor-pointer p-0 z-50 relative group" aria-label="Toggle menu" id="mobile-menu-btn">
+            <span class="w-full h-[2px] bg-text-main rounded-sm transition-all duration-300 block absolute left-0 top-[6px] origin-center"></span>
+            <span class="w-full h-[2px] bg-text-main rounded-sm transition-all duration-300 block absolute left-0 top-[14px] origin-center"></span>
+            <span class="w-full h-[2px] bg-text-main rounded-sm transition-all duration-300 block absolute left-0 top-[22px] origin-center"></span>
           </button>
         </div>
       </div>
@@ -57,269 +56,81 @@ const { title } = Astro.props;
     <main>
       <slot />
     </main>
-    <footer>
-      <div class="container text-center">
+    <footer class="bg-[#05080e] pt-16 pb-8 border-t border-white/5 mt-24">
+      <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8 text-center">
         <p>
           &copy; {new Date().getFullYear()} Monday InIT. Wszystkie prawa zastrzeżone.
         </p>
-        <p class="footer-small">
+        <p class="text-text-muted text-sm mt-4">
           Wydarzenie otwarte dla wszystkich pasjonatów IT, organizowane przez koła naukowe EKA.NET i Kredek działające na Politechnice Wrocławskiej.
         </p>
       </div>
     </footer>
 
     <script is:inline>
-      const menuBtn = document.querySelector(".mobile-menu-btn");
-      const navLinks = document.querySelector(".nav-links");
-      const navItems = document.querySelectorAll(".nav-links a");
-
+      const menuBtn = document.getElementById("mobile-menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const navItems = document.querySelectorAll("#nav-links a");
+      const nav = document.getElementById("main-nav");
+      
+      // Since we moved from css to tailwind, make navbar visible always on mobile for now with basic flex or show/hide classes via JS.
+      // Wait, we need the mobile menu logic with Tailwind.
       if (menuBtn && navLinks) {
+        nav.classList.remove('hidden'); // Ensure visible
+        nav.classList.add('flex');
+        
         menuBtn.addEventListener("click", () => {
           menuBtn.classList.toggle("open");
           navLinks.classList.toggle("active");
-          document.body.style.overflow = navLinks.classList.contains("active")
-            ? "hidden"
-            : "";
+          // Here we would toggle tailwind classes for mobile menu display, but for simplicity we can just apply inline styles or toggle a specific block class.
+          if(navLinks.classList.contains("active")) {
+             navLinks.style.display = "flex";
+             navLinks.style.flexDirection = "column";
+             navLinks.style.position = "absolute";
+             navLinks.style.top = "80px";
+             navLinks.style.left = "0";
+             navLinks.style.width = "100%";
+             navLinks.style.background = "rgba(11, 17, 32, 0.95)";
+             navLinks.style.padding = "2rem";
+             document.body.style.overflow = "hidden";
+          } else {
+             navLinks.style = "";
+             document.body.style.overflow = "";
+          }
         });
 
         navItems.forEach((item) => {
           item.addEventListener("click", () => {
-            menuBtn.classList.remove("open");
-            navLinks.classList.remove("active");
-            document.body.style.overflow = "";
+             navLinks.classList.remove("active");
+             navLinks.style = "";
+             document.body.style.overflow = "";
+             menuBtn.classList.remove("open");
           });
         });
       }
+      
+      // Update hamburger animation on click
+      if(menuBtn) {
+        menuBtn.addEventListener("click", () => {
+          const spans = menuBtn.querySelectorAll('span');
+          if(navLinks.classList.contains("active")) {
+            spans[0].style.transform = 'translateY(8px) rotate(45deg)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+          } else {
+            spans[0].style.transform = '';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = '';
+          }
+        });
+      }
     </script>
+    <style is:global>
+      @media (max-width: 768px) {
+        #nav-links {
+          display: none;
+        }
+      }
+    </style>
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --bg-color: #0b1120;
-    --surface-color: #1e293b;
-    --surface-color-light: #334155;
-    --primary: #2563eb;
-    --secondary: #0ea5e9;
-    --accent: #38bdf8;
-    --monday-yellow: #febf3d;
-    --monday-primary: #febf3d;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --font-heading: "Outfit", sans-serif;
-    --font-body: "Space Grotesk", sans-serif;
-    --gradient-primary: linear-gradient(
-      135deg,
-      var(--primary) 0%,
-      var(--secondary) 100%
-    );
-    --gradient-cool: linear-gradient(
-      135deg,
-      var(--secondary) 0%,
-      var(--accent) 100%
-    );
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
-
-  body {
-    margin: 0;
-    font-family: var(--font-body);
-    background-color: var(--bg-color);
-    background-image: url("../assets/background.svg");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: var(--text-main);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-heading);
-    margin-top: 0;
-    line-height: 1.2;
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.3s ease;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-  }
-
-  @media (max-width: 768px) {
-    .container {
-      padding: 0 1rem;
-    }
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  section {
-    padding: 6rem 0;
-    position: relative;
-  }
-
-  .section-title {
-    font-size: 2.8rem;
-    text-align: center;
-    margin-bottom: 4rem;
-    color: var(--monday-primary);
-    font-weight: 800;
-  }
-
-  /* Navbar */
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(11, 17, 32, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 80px;
-  }
-
-  .logo-link {
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-logo {
-    height: 48px;
-    width: auto;
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-links a {
-    font-weight: 500;
-    font-size: 1rem;
-    color: var(--text-muted);
-    position: relative;
-  }
-
-  .nav-links a:hover {
-    color: var(--text-main);
-  }
-
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .cta-nav {
-    background: var(--gradient-primary);
-    padding: 0.7rem 1.8rem;
-    border-radius: 999px;
-    font-weight: 600;
-    color: white;
-    transition: all 0.3s ease;
-    font-size: 0.95rem;
-  }
-
-  .cta-nav:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
-  }
-
-  .mobile-menu-btn {
-    display: none;
-    width: 30px;
-    height: 30px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1001;
-    position: relative;
-  }
-
-  .mobile-menu-btn span {
-    width: 100%;
-    height: 2px;
-    background: var(--text-main);
-    border-radius: 2px;
-    transition:
-      transform 0.3s ease,
-      opacity 0.3s ease;
-    display: block;
-    position: absolute;
-    left: 0;
-    transform-origin: center;
-  }
-
-  .mobile-menu-btn span:nth-child(1) {
-    top: 6px;
-  }
-  .mobile-menu-btn span:nth-child(2) {
-    top: 14px;
-  }
-  .mobile-menu-btn span:nth-child(3) {
-    top: 22px;
-  }
-
-  .mobile-menu-btn.open span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-  .mobile-menu-btn.open span:nth-child(2) {
-    opacity: 0;
-  }
-  .mobile-menu-btn.open span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-  }
-
-  footer {
-    background-color: #05080e;
-    padding: 4rem 0 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .footer-small {
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    .navbar {
-      display: none;
-    }
-  }
-</style>

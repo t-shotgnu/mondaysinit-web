@@ -3,13 +3,13 @@ import ekaLogo from "../assets/eka_net_logo.svg";
 import kredekLogo from "../assets/kredek_logo.svg";
 ---
 
-<section id="about" class="about-section">
-  <div class="container">
-    <h2 class="section-title">Organizatorzy</h2>
-    <div class="about-grid">
-      <div class="about-card eka">
-        <img src={ekaLogo.src} alt="EKA.NET Logo" class="organizer-logo" />
-        <p>
+<section id="about" class="py-24 bg-transparent relative">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8">
+    <h2 class="text-[2.8rem] text-center mb-16 text-monday-primary font-extrabold">Organizatorzy</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="bg-slate-900/60 backdrop-blur-md border border-white/5 rounded-[24px] p-8 md:p-12 relative overflow-hidden transition-all duration-300 before:absolute before:top-0 before:left-0 before:w-full before:h-1 before:bg-gradient-to-r before:from-[#578bfa] before:to-[#1d4ed8]">
+        <img src={ekaLogo.src} alt="EKA.NET Logo" class="h-12 max-w-full object-contain mb-6" />
+        <p class="text-text-muted text-[1.05rem] leading-[1.8]">
           Jesteśmy społecznością zrzeszającą pasjonatów programowania z Wydziału
           Informatyki i Telekomunikacji. Naszym celem jest zgłębianie tajników
           ekosystemu Microsoft, ze szczególnym uwzględnieniem technologii .NET.
@@ -18,9 +18,9 @@ import kredekLogo from "../assets/kredek_logo.svg";
           pierwsze kroki w świecie komercyjnego IT.
         </p>
       </div>
-      <div class="about-card kredek">
-        <img src={kredekLogo.src} alt="Kredek Logo" class="organizer-logo" />
-        <p>
+      <div class="bg-slate-900/60 backdrop-blur-md border border-white/5 rounded-[24px] p-8 md:p-12 relative overflow-hidden transition-all duration-300 before:absolute before:top-0 before:left-0 before:w-full before:h-1 before:bg-gradient-to-r before:from-[#e98a0e] before:to-[#f72703]">
+        <img src={kredekLogo.src} alt="Kredek Logo" class="h-12 max-w-full object-contain mb-6" />
+        <p class="text-text-muted text-[1.05rem] leading-[1.8]">
           Działamy na Wydziale Informatyki i Telekomunikacji jako inicjatywa
           tworzona przez studentów dla studentów. Wykraczamy poza ramy
           standardowego programu zajęć, promując kulturę dzielenia się wiedzą.

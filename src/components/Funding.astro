@@ -2,45 +2,12 @@
 import dolnySlaskBanner from "../assets/dolny_slask_wsparcie.svg";
 ---
 
-<section id="wsparcie" class="funding-section container">
-  <div class="funding-container">
+<section id="wsparcie" class="text-center px-4 pt-4 pb-24 w-full max-w-[1200px] mx-auto">
+  <div class="bg-slate-900/60 backdrop-blur-md border border-white/5 rounded-[24px] p-2 md:p-10 flex flex-col items-center justify-center max-w-[1000px] mx-auto">
     <img
       src={dolnySlaskBanner.src}
       alt="Dofinansowano ze środków Samorządu Województwa Dolnośląskiego"
-      class="funding-banner"
+      class="w-full max-w-[800px] h-auto opacity-90"
     />
   </div>
 </section>
-
-<style>
-  .funding-section {
-    text-align: center;
-    padding: 1rem 1rem 6rem;
-  }
-  .funding-container {
-    background: rgba(15, 23, 42, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  .funding-banner {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    opacity: 0.9;
-  }
-
-  @media (max-width: 768px) {
-    .funding-container {
-      padding: 0.5rem;
-    }
-  }
-</style>
