@@ -1,0 +1,64 @@
+---
+import helionLogo from "../assets/helion.jpg";
+import GlassCard from "./GlassCard.astro";
+import Typography from "./Typography.astro";
+
+const partners = [
+  {
+    name: "Helion",
+    logo: helionLogo.src,
+    url: "https://helion.pl",
+    description:
+      "Największe polskie wydawnictwo informatyczne. Publikują setki tytułów z zakresu programowania, sieci, baz danych, grafiki i szeroko pojętego IT. Partner wspierający Monday InIT.",
+    accentFrom: "#e2001a",
+    accentTo: "#a00010",
+  },
+];
+---
+
+<section id="partnerzy" class="py-20 bg-transparent relative">
+  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8">
+    <Typography variant="h2" class="mb-4">Partnerzy</Typography>
+    <Typography variant="body" class="mb-12 text-text-muted max-w-[600px]">
+      Dziękujemy partnerom, którzy wspierają naszą inicjatywę.
+    </Typography>
+    <div class="flex flex-wrap gap-8">
+      {
+        partners.map((partner) => (
+          <a
+            href={partner.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="no-underline flex-1 min-w-[280px] max-w-[420px]"
+          >
+            <GlassCard
+              hoverable={true}
+              class={`p-8 relative overflow-hidden transition-all duration-300 before:absolute before:top-0 before:left-0 before:w-full before:h-1 before:bg-gradient-to-r`}
+              style={`--tw-gradient-from: ${partner.accentFrom}; --tw-gradient-to: ${partner.accentTo};`}
+            >
+              <div
+                class="absolute top-0 left-0 w-full h-1 rounded-t-[inherit]"
+                style={`background: linear-gradient(to right, ${partner.accentFrom}, ${partner.accentTo});`}
+              />
+              <img
+                src={partner.logo}
+                alt={`${partner.name} Logo`}
+                class="h-12 max-w-[180px] object-contain mb-5"
+              />
+              <Typography variant="body" class="text-text-muted text-sm">
+                {partner.description}
+              </Typography>
+              <div class="flex items-center gap-2 mt-4 text-sm font-medium text-monday-yellow">
+                <span>Odwiedź stronę</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7" />
+                  <polyline points="7 7 17 7 17 17" />
+                </svg>
+              </div>
+            </GlassCard>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
