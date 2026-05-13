@@ -3,6 +3,8 @@ import ekaLogo from "../assets/eka_net_logo.svg";
 import xebiaLogo from "../assets/Xebia_Logo_0.svg";
 import capgeminiLogo from "../assets/capgemini_logo.svg";
 import cuttingEdgeLogo from "../assets/cutting_edge_logo.png";
+import GlassCard from "./GlassCard.astro";
+import Typography from "./Typography.astro";
 
 const presentations = [
   {
@@ -62,22 +64,24 @@ const presentations = [
 
 <section id="prelekcje" class="bg-transparent relative py-24">
   <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8">
-    <h2 class="text-[2.8rem] text-center mb-16 text-monday-primary font-extrabold">Prelekcje</h2>
-    <div class="max-w-[800px] mx-auto relative z-10 before:content-[''] before:absolute before:left-[12px] md:before:left-[120px] before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-[#0ea5e999] before:to-transparent before:shadow-[0_0_10px_rgba(14,165,233,0.3)]">
+    <Typography variant="h2" class="mb-16">Prelekcje</Typography>
+    <div
+      class="max-w-[800px] mx-auto relative z-10 before:content-[''] before:absolute before:left-[12px] md:before:left-[120px] before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-[#0ea5e999] before:to-transparent before:shadow-[0_0_10px_rgba(14,165,233,0.3)]"
+    >
       {
         presentations.map((pres) => (
-          <div class="group flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-[3px] md:after:left-[111px] after:top-[2px] md:after:top-[5px] after:w-[20px] after:h-[20px] after:rounded-full after:bg-bg-base after:border-4 after:border-accent after:z-20 after:transition-all after:duration-400 group-hover:after:bg-accent group-hover:after:shadow-[0_0_20px_5px_rgba(14,165,233,0.4)]">
-            <div class="w-auto md:w-[120px] pr-0 md:pr-8 pl-10 md:pl-0 mb-2 md:mb-0 font-extrabold text-monday-primary font-heading text-[1.15rem] tracking-wide drop-shadow-[0_0_20px_rgba(254,191,61,0.2)] transition-transform duration-300">
+          <div class="flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-[3px] md:after:left-[111px] after:top-[2px] md:after:top-[5px] after:w-[20px] after:h-[20px] after:rounded-full after:bg-bg-base after:border-4 after:border-accent after:z-20">
+            <div class="w-auto md:w-[120px] pr-0 md:pr-8 pl-10 md:pl-0 mb-2 md:mb-0 font-extrabold text-monday-primary font-heading text-[1.15rem] tracking-wide drop-shadow-[0_0_20px_rgba(254,191,61,0.2)]">
               {pres.date}
               <br />
               {pres.time}
             </div>
-            <div class="flex-1 ml-9 md:ml-4 bg-slate-900/60 backdrop-blur-md p-4 md:p-8 rounded-[20px] border border-white/5 transition-all duration-400 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] relative overflow-hidden group-hover:bg-slate-800/80 group-hover:border-blue-500/30 group-hover:shadow-[0_20px_40px_-15px_rgba(14,165,233,0.3)] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-br before:from-white/10 before:to-transparent before:opacity-0 before:transition-opacity before:duration-400 before:z-0 before:pointer-events-none group-hover:before:opacity-100">
+            <GlassCard class="flex-1 ml-9 md:ml-4 p-4 md:p-8 !rounded-[20px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] relative overflow-hidden">
               <div class="relative z-10">
                 <div class="flex justify-between items-start gap-4 mb-3 flex-wrap">
-                  <h3 class="m-0 flex-1 min-w-[200px] text-[1.4rem] text-slate-50 font-bold tracking-tight">
+                  <Typography variant="h3" class="m-0 flex-1 min-w-[200px]">
                     {pres.title}
-                  </h3>
+                  </Typography>
                   {pres.logos && pres.logos.length > 0 && (
                     <div class="flex items-center gap-4 flex-wrap">
                       {pres.logos.map((logo) => (
@@ -112,11 +116,19 @@ const presentations = [
                     </span>
                   </div>
                 )}
-  
-                <div class="text-slate-400 leading-relaxed text-[1.05rem] [&>strong]:text-slate-200 [&>strong]:font-semibold mb-4" set:html={pres.speaker} />
-                <div class="text-slate-400 leading-relaxed text-[1.05rem] [&>strong]:text-slate-200 [&>strong]:font-semibold" set:html={pres.description} />
+
+                <Typography
+                  variant="body"
+                  class="[&>strong]:text-slate-200 [&>strong]:font-semibold mb-4"
+                  set:html={pres.speaker}
+                />
+                <Typography
+                  variant="body"
+                  class="[&>strong]:text-slate-200 [&>strong]:font-semibold"
+                  set:html={pres.description}
+                />
               </div>
-            </div>
+            </GlassCard>
           </div>
         ))
       }

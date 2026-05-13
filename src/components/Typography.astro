@@ -1,0 +1,59 @@
+---
+type Variant =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "body"
+  | "body-large"
+  | "muted"
+  | "accent";
+type Tag =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "h4"
+  | "h5"
+  | "h6"
+  | "p"
+  | "span"
+  | "div"
+  | "label";
+
+interface Props {
+  as?: Tag;
+  variant?: Variant;
+  class?: string;
+}
+
+const { variant = "body", class: className = "", ...rest } = Astro.props;
+
+const variants: Record<Variant, string> = {
+  h1: "text-[clamp(2.5rem,5vw,3.5rem)] text-monday-primary font-extrabold font-heading text-center",
+  h2: "text-[2.8rem] text-monday-primary font-extrabold font-heading text-center",
+  h3: "text-[1.4rem] text-slate-50 font-bold tracking-tight",
+  h4: "text-xl text-text-main font-heading font-bold",
+  body: "text-[1.05rem] leading-[1.8] text-text-muted",
+  "body-large": "text-[1.2rem] text-text-main font-medium",
+  muted: "text-[0.85rem] text-text-muted",
+  accent: "font-medium text-accent text-[0.95rem]",
+};
+
+const defaultTag: Record<Variant, Tag> = {
+  h1: "h1",
+  h2: "h2",
+  h3: "h3",
+  h4: "h4",
+  body: "p",
+  "body-large": "p",
+  muted: "span",
+  accent: "span",
+};
+
+const TagName = Astro.props.as || defaultTag[variant];
+const variantClass = variants[variant];
+---
+
+<TagName class:list={[variantClass, className]} {...rest}>
+  <slot />
+</TagName>

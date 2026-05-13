@@ -1,13 +1,19 @@
 ---
 import dolnySlaskBanner from "../assets/dolny_slask_wsparcie.svg";
+import GlassCard from "./GlassCard.astro";
 ---
 
-<section id="wsparcie" class="text-center px-4 pt-4 pb-24 w-full max-w-[1200px] mx-auto">
-  <div class="bg-slate-900/60 backdrop-blur-md border border-white/5 rounded-[24px] p-2 md:p-10 flex flex-col items-center justify-center max-w-[1000px] mx-auto">
+<section
+  id="wsparcie"
+  class="text-center px-4 pt-4 pb-24 w-full max-w-[1200px] mx-auto"
+>
+  <GlassCard
+    class="p-2 md:p-10 flex flex-col items-center justify-center max-w-[1000px] mx-auto"
+  >
     <img
       src={dolnySlaskBanner.src}
       alt="Dofinansowano ze środków Samorządu Województwa Dolnośląskiego"
       class="w-full max-w-[800px] h-auto opacity-90"
     />
-  </div>
+  </GlassCard>
 </section>
