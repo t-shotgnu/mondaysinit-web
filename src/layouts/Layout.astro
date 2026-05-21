@@ -73,16 +73,13 @@ const { title } = Astro.props;
       const navItems = document.querySelectorAll("#nav-links a");
       const nav = document.getElementById("main-nav");
       
-      // Since we moved from css to tailwind, make navbar visible always on mobile for now with basic flex or show/hide classes via JS.
-      // Wait, we need the mobile menu logic with Tailwind.
       if (menuBtn && navLinks) {
-        nav.classList.remove('hidden'); // Ensure visible
+        nav.classList.remove('hidden');
         nav.classList.add('flex');
         
         menuBtn.addEventListener("click", () => {
           menuBtn.classList.toggle("open");
           navLinks.classList.toggle("active");
-          // Here we would toggle tailwind classes for mobile menu display, but for simplicity we can just apply inline styles or toggle a specific block class.
           if(navLinks.classList.contains("active")) {
              navLinks.style.display = "flex";
              navLinks.style.flexDirection = "column";
@@ -109,7 +106,6 @@ const { title } = Astro.props;
         });
       }
       
-      // Update hamburger animation on click
       if(menuBtn) {
         menuBtn.addEventListener("click", () => {
           const spans = menuBtn.querySelectorAll('span');
