@@ -36,6 +36,7 @@ const presentations = [
     speaker: "<strong>Filip Kwiek</strong>, prezes Koła Naukowego EKA.NET",
     description: `Nasz cykl rozpoczniemy warsztatami od EKA.NET - jednego z naszych organizatorów, którzy pokażą jak napisać frontend z pomocą... C#!<br /><br />Ucząc się C# i powiązanych technologii, wiele usłyszeć można o Blazorze. Dla niektórych jest to kolejne wymyślanie koła na nowo, a dla innych kolejny dziwny pomysł Microsoftu, podobny do silverlight-a, który nie przetrwa dłużej. Jednak wraz ze swoim wejściem w 2018 razem z .NET Core 3.0, do tego momentu działa i jest prężnie rozwijany przez Microsoft.<br /><br />Po co nam kolejny webowy framework UI? Dlaczego to jest dla Nas, jako dotnetowców przydatne? W kilka chwil stworzymy razem Waszą pierwszą aplikację w Blazorze, pobierając dane z portalu Open Data Wrocław oraz poddając je analizie na dwa sposoby.<br /><br />Celem warsztatów jest pokazanie, że nawet dla backendowca nie taki frontend straszny jak go malują. 😇`,
     photos: [photo1_1, photo1_2, photo1_3, photo1_4, photo1_5, photo1_6],
+    completed: true,
   },
   {
     date: "18 Maja 2026",
@@ -53,6 +54,7 @@ const presentations = [
       "<strong>Paweł Muraczewski</strong>, team leader i senior fullstack developer z firmy Xebia!",
     description: `Dzięki niemu, na realnych przykładach z branży dowiemy się, jak skutecznie dobierać architekturę aplikacji. ⚡<br /><br />Cały warsztat będzie miał na celu przedstawienie wiodących podejść w projektowaniu architektury dużych komercyjnych aplikacji internetowych. Zaprezentowane zostaną najpopularniejsze rodzaje architektury systemów wraz ze sposobem ich implementacji. Przedyskutujemy również ich zalety i wady oraz spróbujemy zdecydować o idealnych przypadkach ich użycia.<br /><br />Wszystko po to, aby zachęcić obecnych na warsztacie do zdroworozsądkowego doboru architektury. Nie ma przecież rozwiązania idealnego do wszystkich problemów, decyzja architektoniczna zawsze mocno zależeć musi od analizy potrzeb klienta. ⚖️`,
     photos: [photo_2_1, photo_2_2, photo_2_3, photo_2_4],
+    completed: true,
   },
   {
     date: "25 Maja 2026",
@@ -74,19 +76,38 @@ const presentations = [
     speaker:
       "<strong>Krzysztof Korus</strong> z Capgemini, członek Cutting Edge Community",
     description: `Odkrywamy wszystkie karty na maj!<br /><br />Te warsztaty pokażą Wam, że użycie AI nie zawsze wiąże się z "vibe codingiem". Tutaj dowiecie się m.in. jak świadomie używać AI zarówno w projektach prywatnych jak i komercyjnych oraz jak zarządzać kontekstem narzędzia AI.<br /><br />Poznacie również liczne wskazówki dobrych praktyk pracy z narzędziami takimi jak Github Copilot czy Claude Code. 🤖`,
+    completed: false,
   },
 ];
+
 ---
 
 <section id="prelekcje" class="bg-transparent relative py-24">
   <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8">
     <Typography variant="h2" class="mb-16">Prelekcje</Typography>
-    <div
-      class="max-w-[800px] mx-auto relative z-10 before:content-[''] before:absolute before:left-[12px] md:before:left-[120px] before:top-0 before:bottom-0 before:w-[2px] before:bg-gradient-to-b before:from-transparent before:via-[#0ea5e999] before:to-transparent before:shadow-[0_0_10px_rgba(14,165,233,0.3)]"
-    >
+    <div class="max-w-[800px] mx-auto relative z-10">
+      <div class="absolute left-[12px] md:left-[120px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#0ea5e999] to-transparent shadow-[0_0_10px_rgba(14,165,233,0.3)]"></div>
       {
-        presentations.map((pres) => (
-          <div class="flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-[3px] md:after:left-[111px] after:top-[2px] md:after:top-[5px] after:w-[20px] after:h-[20px] after:rounded-full after:bg-bg-base after:border-4 after:border-accent after:z-20">
+        presentations.map((pres, index) => {
+          const next = presentations[index + 1];
+          const showLine = Boolean(next);
+          const lineClass = pres.completed
+            ? next?.completed
+              ? "bg-emerald-500/70"
+              : "bg-gradient-to-b from-emerald-500/70 to-sky-500/70"
+            : "";
+
+          return (
+            <div class:list={[
+              "flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-[3px] md:after:left-[111px] after:top-[2px] md:after:top-[5px] after:w-[20px] after:h-[20px] after:rounded-full after:bg-bg-base after:border-4 after:z-20",
+              pres.completed ? "after:border-emerald-500 after:shadow-[0_0_10px_rgba(16,185,129,0.5)]" : "after:border-accent"
+            ]}>
+              {showLine && lineClass && (
+                <span
+                  class={`absolute left-[12px] md:left-[120px] top-[12px] w-[2px] h-[calc(100%+48px)] md:h-[calc(100%+64px)] ${lineClass}`}
+                  aria-hidden="true"
+                ></span>
+              )}
             <div class="w-auto md:w-[120px] pr-0 md:pr-8 pl-10 md:pl-0 mb-2 md:mb-0 font-extrabold text-monday-primary font-heading text-[1.15rem] tracking-wide drop-shadow-[0_0_20px_rgba(254,191,61,0.2)]">
               {pres.date}
               <br />
@@ -95,9 +116,21 @@ const presentations = [
             <GlassCard class="flex-1 ml-9 md:ml-4 p-4 md:p-8 !rounded-[20px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] relative overflow-hidden">
               <div class="relative z-10">
                 <div class="flex justify-between items-start gap-4 mb-3 flex-wrap">
-                  <Typography variant="h3" class="m-0 flex-1 min-w-[200px]">
-                    {pres.title}
-                  </Typography>
+                  <div class="flex-1 min-w-[200px]">
+                    <div class="flex items-center gap-3 flex-wrap">
+                      <Typography variant="h3" class="m-0">
+                        {pres.title}
+                      </Typography>
+                      {pres.completed && (
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-[0_2px_10px_rgba(16,185,129,0.1)] transition-all duration-300">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 6 9 17l-5-5"/>
+                          </svg>
+                          Prelekcja się odbyła, dziękujemy za udział! 🙌
+                        </span>
+                      )}
+                    </div>
+                  </div>
                   {pres.logos && pres.logos.length > 0 && (
                     <div class="flex items-center gap-4 flex-wrap">
                       {pres.logos.map((logo) => (
@@ -164,8 +197,9 @@ const presentations = [
                 )}
               </div>
             </GlassCard>
-          </div>
-        ))
+            </div>
+          );
+        })
       }
     </div>
   </div>
