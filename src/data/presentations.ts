@@ -4,6 +4,7 @@ import capgeminiLogo from "../assets/capgemini_logo.svg";
 import cuttingEdgeLogo from "../assets/cutting_edge_logo.png";
 import csharkLogo from "../assets/cshark_logo.svg";
 import vonageLogo from "../assets/vonage_logo.svg";
+import withLogo from "../assets/with_logo.svg";
 
 // Photo imports for past events
 import photo1_1 from "../assets/11_05_2026/1.jpg";
@@ -131,10 +132,22 @@ export const presentations: Presentation[] = [
   {
     date: "15 Czerwca 2026",
     time: "18:00",
-    title: "Temat wkrótce...",
+    title: "Sync vs Async & Big Data w cyberbezpieczeństwie",
+    logos: [
+      {
+        src: xebiaLogo.src,
+        alt: "Xebia Logo",
+        style: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
+      },
+      {
+        src: withLogo.src,
+        alt: "WithSecure Logo",
+        style: "height: 36px; width: auto; opacity: 0.9; flex-shrink: 0;",
+      },
+    ],
     location: "s. D1.2 C-16 PWr",
-    speaker: "<strong>Prelegent i organizator wkrótce</strong>",
-    description: "Szykujemy dla Was wyjątkowe zamknięcie całego cyklu warsztatów Monday InIT. Szczegóły dotyczące ostatniego spotkania, temat prelekcji oraz organizator zostaną ogłoszeni już wkrótce! Bądźcie czujni! 🚀<br /><br />🍕 <strong>Na uczestników warsztatów czeka darmowa pizza!</strong>",
+    speaker: "<strong>Kacper Pilkowski</strong> (Xebia) oraz <strong>Michał Szymczyk</strong> (WithSecure)",
+    description: "Nasz cykl zakończymy Wielkim Finałem - usłyszymy aż dwie prelekcje w ramach jednych zajęć! 🚀<br /><br /><strong>Prelekcja 1 🌐📨</strong><br /><strong>\"Sync vs Async - architektura komunikacji w aplikacjach webowych\"</strong> którą przeprowadzi Kacper Pilkowski z firmy Xebia.<br />Skupimy się na tym, jak serwisy komunikują się ze sobą, omówimy komunikację synchroniczną (REST, gRPC) oraz asynchroniczną (kolejki, event broker) oraz pokażemy trade-offy obu podejść.<br /><br /><strong>Prelekcja 2 🛡️👾</strong><br /><strong>\"Miliony sygnałów, jeden atak: Big Data w cyberbezpieczeństwie\"</strong> którą przeprowadzi Michał Szymczyk z firmy WithSecure.<br />Ta prelekcja pokaże co wspólnego mają dane z bezpieczeństwem, czyli jak analiza ogromnych ilości danych i zdarzeń bezpieczeństwa pomaga wykrywać cyberataki oraz reagować na zagrożenia w czasie rzeczywistym.<br /><br />🍕 <strong>Na uczestników warsztatów czeka darmowa pizza!</strong>",
     completed: false,
   },
 ];
