@@ -1,84 +1,15 @@
 ---
-import ekaLogo from "../assets/eka_net_logo.svg";
-import xebiaLogo from "../assets/Xebia_Logo_0.svg";
-import capgeminiLogo from "../assets/capgemini_logo.svg";
-import cuttingEdgeLogo from "../assets/cutting_edge_logo.png";
 import GlassCard from "./GlassCard.astro";
 import Typography from "./Typography.astro";
 import { Image } from "astro:assets";
+import { presentations } from "../data/presentations";
 
-// Photo imports for past events
-import photo1_1 from "../assets/11_05_2026/1.jpg";
-import photo1_2 from "../assets/11_05_2026/2.jpg";
-import photo1_3 from "../assets/11_05_2026/3.jpg";
-import photo1_4 from "../assets/11_05_2026/4.jpg";
-import photo1_5 from "../assets/11_05_2026/5.jpg";
-import photo1_6 from "../assets/11_05_2026/6.jpg";
-
-import photo_2_1 from "../assets/18_05_2026/1.png";
-import photo_2_2 from "../assets/18_05_2026/2.png";
-import photo_2_3 from "../assets/18_05_2026/3.png";
-import photo_2_4 from "../assets/18_05_2026/4.png";
-
-const presentations = [
-  {
-    date: "11 Maja 2026",
-    time: "18:00",
-    title: "Tworzenie aplikacji w Blazorze",
-    logos: [
-      {
-        src: ekaLogo.src,
-        alt: "EKA.NET Logo",
-        style: "height: 32px; width: auto; opacity: 0.9; flex-shrink: 0;",
-      },
-    ],
-    location: "s. D1.2 C-16 PWr",
-    speaker: "<strong>Filip Kwiek</strong>, prezes Koła Naukowego EKA.NET",
-    description: `Nasz cykl rozpoczniemy warsztatami od EKA.NET - jednego z naszych organizatorów, którzy pokażą jak napisać frontend z pomocą... C#!<br /><br />Ucząc się C# i powiązanych technologii, wiele usłyszeć można o Blazorze. Dla niektórych jest to kolejne wymyślanie koła na nowo, a dla innych kolejny dziwny pomysł Microsoftu, podobny do silverlight-a, który nie przetrwa dłużej. Jednak wraz ze swoim wejściem w 2018 razem z .NET Core 3.0, do tego momentu działa i jest prężnie rozwijany przez Microsoft.<br /><br />Po co nam kolejny webowy framework UI? Dlaczego to jest dla Nas, jako dotnetowców przydatne? W kilka chwil stworzymy razem Waszą pierwszą aplikację w Blazorze, pobierając dane z portalu Open Data Wrocław oraz poddając je analizie na dwa sposoby.<br /><br />Celem warsztatów jest pokazanie, że nawet dla backendowca nie taki frontend straszny jak go malują. 😇`,
-    photos: [photo1_1, photo1_2, photo1_3, photo1_4, photo1_5, photo1_6],
-    completed: true,
-  },
-  {
-    date: "18 Maja 2026",
-    time: "18:00",
-    title: "Skuteczny dobór architektury aplikacji",
-    logos: [
-      {
-        src: xebiaLogo.src,
-        alt: "Xebia Logo",
-        style: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
-      },
-    ],
-    location: "s. D1.2 C-16 PWr",
-    speaker:
-      "<strong>Paweł Muraczewski</strong>, team leader i senior fullstack developer z firmy Xebia!",
-    description: `Dzięki niemu, na realnych przykładach z branży dowiemy się, jak skutecznie dobierać architekturę aplikacji. ⚡<br /><br />Cały warsztat będzie miał na celu przedstawienie wiodących podejść w projektowaniu architektury dużych komercyjnych aplikacji internetowych. Zaprezentowane zostaną najpopularniejsze rodzaje architektury systemów wraz ze sposobem ich implementacji. Przedyskutujemy również ich zalety i wady oraz spróbujemy zdecydować o idealnych przypadkach ich użycia.<br /><br />Wszystko po to, aby zachęcić obecnych na warsztacie do zdroworozsądkowego doboru architektury. Nie ma przecież rozwiązania idealnego do wszystkich problemów, decyzja architektoniczna zawsze mocno zależeć musi od analizy potrzeb klienta. ⚖️`,
-    photos: [photo_2_1, photo_2_2, photo_2_3, photo_2_4],
-    completed: true,
-  },
-  {
-    date: "25 Maja 2026",
-    time: "18:00",
-    title: "Świadome użycie AI",
-    logos: [
-      {
-        src: capgeminiLogo.src,
-        alt: "Capgemini Logo",
-        style: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
-      },
-      {
-        src: cuttingEdgeLogo.src,
-        alt: "Cutting Edge Logo",
-        style: "height: 40px; width: auto; opacity: 0.9; flex-shrink: 0;",
-      },
-    ],
-    location: "Zdalnie",
-    speaker:
-      "<strong>Krzysztof Korus</strong> z Capgemini, członek Cutting Edge Community",
-    description: `Odkrywamy wszystkie karty na maj!<br /><br />Te warsztaty pokażą Wam, że użycie AI nie zawsze wiąże się z "vibe codingiem". Tutaj dowiecie się m.in. jak świadomie używać AI zarówno w projektach prywatnych jak i komercyjnych oraz jak zarządzać kontekstem narzędzia AI.<br /><br />Poznacie również liczne wskazówki dobrych praktyk pracy z narzędziami takimi jak Github Copilot czy Claude Code. 🤖`,
-    completed: false,
-  },
-];
+const getPreview = (html: string) => {
+  // Replace HTML tags with space, then clean up multiple spaces
+  const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+  if (text.length <= 140) return text;
+  return text.substring(0, 140).trim() + '...';
+};
 
 ---
 
@@ -86,7 +17,7 @@ const presentations = [
   <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8">
     <Typography variant="h2" class="mb-16">Prelekcje</Typography>
     <div class="max-w-[800px] mx-auto relative z-10">
-      <div class="absolute left-[12px] md:left-[120px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#0ea5e999] to-transparent shadow-[0_0_10px_rgba(14,165,233,0.3)]"></div>
+      <div class="absolute left-[12px] md:left-[160px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#0ea5e999] to-transparent shadow-[0_0_10px_rgba(14,165,233,0.3)]"></div>
       {
         presentations.map((pres, index) => {
           const next = presentations[index + 1];
@@ -99,16 +30,16 @@ const presentations = [
 
           return (
             <div class:list={[
-              "flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-[3px] md:after:left-[111px] after:top-[2px] md:after:top-[5px] after:w-[20px] after:h-[20px] after:rounded-full after:bg-bg-base after:border-4 after:z-20",
+              "flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-[3px] md:after:left-[151px] after:top-[2px] md:after:top-[5px] after:w-[20px] after:h-[20px] after:rounded-full after:bg-bg-base after:border-4 after:z-20",
               pres.completed ? "after:border-emerald-500 after:shadow-[0_0_10px_rgba(16,185,129,0.5)]" : "after:border-accent"
             ]}>
               {showLine && lineClass && (
                 <span
-                  class={`absolute left-[12px] md:left-[120px] top-[12px] w-[2px] h-[calc(100%+48px)] md:h-[calc(100%+64px)] ${lineClass}`}
+                  class={`absolute left-[12px] md:left-[160px] top-[12px] w-[2px] h-[calc(100%+48px)] md:h-[calc(100%+64px)] ${lineClass}`}
                   aria-hidden="true"
                 ></span>
               )}
-            <div class="w-auto md:w-[120px] pr-0 md:pr-8 pl-10 md:pl-0 mb-2 md:mb-0 font-extrabold text-monday-primary font-heading text-[1.15rem] tracking-wide drop-shadow-[0_0_20px_rgba(254,191,61,0.2)]">
+            <div class="w-auto md:w-[160px] pr-0 md:pr-8 pl-10 md:pl-0 mb-2 md:mb-0 font-extrabold text-monday-primary font-heading text-[1.15rem] tracking-wide drop-shadow-[0_0_20px_rgba(254,191,61,0.2)]">
               {pres.date}
               <br />
               {pres.time}
@@ -137,13 +68,14 @@ const presentations = [
                         <img
                           src={logo.src}
                           alt={logo.alt}
-                          class="h-[40px] w-auto opacity-90 max-w-full object-contain"
+                          style={logo.style}
+                          class="max-w-full object-contain"
                         />
                       ))}
                     </div>
                   )}
                 </div>
-                {pres.location && (
+                {!pres.completed && pres.location && (
                   <div class="flex items-center gap-2 mb-4 text-monday-yellow">
                     <svg
                       width="18"
@@ -166,34 +98,87 @@ const presentations = [
                   </div>
                 )}
 
-                <Typography
-                  variant="body"
-                  class="[&>strong]:text-slate-200 [&>strong]:font-semibold mb-4"
-                  set:html={pres.speaker}
-                />
-                <Typography
-                  variant="body"
-                  class="[&>strong]:text-slate-200 [&>strong]:font-semibold"
-                  set:html={pres.description}
-                />
-                
-                {pres.photos && pres.photos.length > 0 && (
-                  <div class="mt-6 flex flex-wrap gap-4">
-                    {pres.photos.map((photo) => (
-                      <div 
-                        class="relative group cursor-pointer overflow-hidden rounded-xl border border-white/10 hover:border-monday-yellow/50 transition-all duration-300 lightbox-trigger"
-                        data-src={photo.src}
-                      >
-                        <Image 
-                          src={photo} 
-                          alt="Zdjęcie z wydarzenia" 
-                          width={300}
-                          quality="mid"
-                          class="h-20 w-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
-                        />
+                {pres.completed ? (
+                  <details class="group mt-4">
+                    <summary class="cursor-pointer text-text-muted hover:text-slate-200 select-none list-none [&::-webkit-details-marker]:hidden flex flex-col gap-2">
+                      <div class="text-sm line-clamp-2 md:line-clamp-1 group-open:hidden opacity-80 transition-opacity">
+                        {getPreview(pres.description)}
                       </div>
-                    ))}
-                  </div>
+                      <div class="flex items-center gap-2 text-monday-yellow hover:text-monday-yellow/80 font-semibold mt-1">
+                        <span class="group-open:hidden">Więcej...</span>
+                        <span class="hidden group-open:inline">Mniej</span>
+                        <svg class="w-4 h-4 transition-transform duration-300 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                      </div>
+                    </summary>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                      {pres.location && (
+                        <div class="flex items-center gap-2 mb-4 text-monday-yellow">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          >
+                            <>
+                              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                              <circle cx="12" cy="10" r="3" />
+                            </>
+                          </svg>
+                          <span class="text-[0.95rem] font-medium">
+                            {pres.location}
+                          </span>
+                        </div>
+                      )}
+                      <Typography
+                        variant="body"
+                        class="[&>strong]:text-slate-200 [&>strong]:font-semibold mb-4"
+                        set:html={pres.speaker}
+                      />
+                      <Typography
+                        variant="body"
+                        class="[&>strong]:text-slate-200 [&>strong]:font-semibold"
+                        set:html={pres.description}
+                      />
+                      
+                      {pres.photos && pres.photos.length > 0 && (
+                        <div class="mt-6 flex flex-wrap gap-4">
+                          {pres.photos.map((photo) => (
+                            <div 
+                              class="relative group cursor-pointer overflow-hidden rounded-xl border border-white/10 hover:border-monday-yellow/50 transition-all duration-300 lightbox-trigger"
+                              data-src={photo.src}
+                            >
+                              <Image 
+                                src={photo} 
+                                alt="Zdjęcie z wydarzenia" 
+                                width={300}
+                                quality="mid"
+                                class="h-20 w-auto object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </details>
+                ) : (
+                  <>
+                    <Typography
+                      variant="body"
+                      class="[&>strong]:text-slate-200 [&>strong]:font-semibold mb-4"
+                      set:html={pres.speaker}
+                    />
+                    <Typography
+                      variant="body"
+                      class="[&>strong]:text-slate-200 [&>strong]:font-semibold"
+                      set:html={pres.description}
+                    />
+                  </>
                 )}
               </div>
             </GlassCard>
