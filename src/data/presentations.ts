@@ -100,7 +100,7 @@ export const presentations: Presentation[] = [
   {
     date: "1 Czerwca 2026",
     time: "18:00",
-    title: "Kariera w software development",
+    title: "Koniec ery 'Programista .NET' - co naprawdę będzie się liczyć w pracy inżyniera?",
     logos: [
       {
         src: csharkLogo.src,
@@ -111,7 +111,7 @@ export const presentations: Presentation[] = [
     location: "s. D1.2 C-16 PWr",
     speaker: "<strong>Adam Skubiszewski</strong> z CSHARK",
     description: `Pierwsze warsztaty kolejnej części cyklu przeprowadzi Adam Skubiszewski z CSHARK. 🦈<br /><br /><strong>O Prelekcji:</strong><br />Kariera w software development zmienia się szybciej niż w jakimkolwiek momencie w ostatnich 20 latach. Język programowania, struktury danych, frameworki, a nawet znajomość technologii chmurowych - to wciąż fundament, który jednak przestaje wystarczać. W tej prelekcji pokażę, jak wyglądała praca programisty 15 lat temu, jak wygląda dziś (zespoły produktowe PO + engineer, AI jako część codziennego workflow) i dokąd to wszystko zmierza w perspektywie 3-5 lat. Opowiem o tym z perspektywy osoby, która odpowiada za SDLC w 230-osobowej organizacji i sama na co dzień pracuje z AI jako kluczowym narzędziu pracy - nie jako gadżecie. Na koniec konkrety: kilka realnych narzędzi i workflow'ów, które można wdrożyć od razu, żeby zacząć budować tę przewagę.`,
-    completed: false,
+    completed: true,
   },
   {
     date: "8 Czerwca 2026",
