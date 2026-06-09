@@ -19,6 +19,16 @@ import photo_2_2 from "../assets/18_05_2026/2.png";
 import photo_2_3 from "../assets/18_05_2026/3.png";
 import photo_2_4 from "../assets/18_05_2026/4.png";
 
+import photo_4_1 from "../assets/01_06_2026/1.png"; 
+import photo_4_2 from "../assets/01_06_2026/2.png";
+import photo_4_3 from "../assets/01_06_2026/3.png";
+import photo_4_4 from "../assets/01_06_2026/4.png";
+
+import photo_5_1 from "../assets/08_06_2026/1.png";
+import photo_5_2 from "../assets/08_06_2026/2.png";
+import photo_5_3 from "../assets/08_06_2026/3.png";
+import photo_5_4 from "../assets/08_06_2026/4.png";
+
 import type { ImageMetadata } from "astro";
 
 export interface Logo {
@@ -111,6 +121,7 @@ export const presentations: Presentation[] = [
     location: "s. D1.2 C-16 PWr",
     speaker: "<strong>Adam Skubiszewski</strong> z CSHARK",
     description: `Pierwsze warsztaty kolejnej części cyklu przeprowadzi Adam Skubiszewski z CSHARK. 🦈<br /><br /><strong>O Prelekcji:</strong><br />Kariera w software development zmienia się szybciej niż w jakimkolwiek momencie w ostatnich 20 latach. Język programowania, struktury danych, frameworki, a nawet znajomość technologii chmurowych - to wciąż fundament, który jednak przestaje wystarczać. W tej prelekcji pokażę, jak wyglądała praca programisty 15 lat temu, jak wygląda dziś (zespoły produktowe PO + engineer, AI jako część codziennego workflow) i dokąd to wszystko zmierza w perspektywie 3-5 lat. Opowiem o tym z perspektywy osoby, która odpowiada za SDLC w 230-osobowej organizacji i sama na co dzień pracuje z AI jako kluczowym narzędziu pracy - nie jako gadżecie. Na koniec konkrety: kilka realnych narzędzi i workflow'ów, które można wdrożyć od razu, żeby zacząć budować tę przewagę.`,
+    photos: [photo_4_1, photo_4_2, photo_4_3, photo_4_4],
     completed: true,
   },
   {
@@ -127,6 +138,7 @@ export const presentations: Presentation[] = [
     location: "s. D1.2 C-16 PWr",
     speaker: "<strong>Mikołaj Konko-Zachoszcz, Maciej Fras, Róża Kwiatkowska</strong> z firmy Vonage",
     description: `Prelekcja składa się z 3 uzupełniających się części przeprowadzonych przez prelegentów z firmy Vonage, którzy odpowiedzą na pytanie, jak współcześnie pogodzić rozwój oprogramowania, zespół i narzędzia AI. 🤹‍♂️<br /><br /><strong>Mikołaj Konko-Zachoszcz: Nie wierz ślepo w swoje prompty - czego AI nie zastąpi programiście? 🤖⚙️</strong><br />Comprehension debt, halucynacje, LLMy potwierdzające hipotezy i przyspieszenie tempa pracy.<br /><br /><strong>Maciej Fras: Nie tylko kod - rozwój kariery inżyniera oprogramowania. 🧑‍💻📈</strong><br />Jak zadbać o rozwój swojej kariery jako programista. Rola jaką odgrywają budowanie relacji, współpraca w zespole, na czym polega specyfika różnych rodzajów firm z którymi można mieć do czynienia. Wszystko to na podstawie książki "The Software Engineer Guidebook" oraz własnych doświadczeń.<br /><br /><strong>Róża Kwiatkowska: Czym jest Scrum i jak wygląda jego wykorzystanie w praktyce. 👥🎯</strong><br />Jakie umiejętności są przydatne nie tylko w IT, ale w każdej pracy — m.in. komunikacja, współpraca, organizacja pracy, planowanie oraz rozwiązywanie problemów. Scrum to nie tylko framework, ale także sposób efektywnego działania i współpracy.<br /><br />🍕 <strong>Na uczestników warsztatów czeka darmowa pizza!</strong>`,
+    photos: [photo_5_1, photo_5_2, photo_5_3, photo_5_4],
     completed: true,
   },
   {
