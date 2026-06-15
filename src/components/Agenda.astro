@@ -4,20 +4,22 @@ import Typography from "./Typography.astro";
 import { Image } from "astro:assets";
 import { presentations } from "../data/presentations";
 
+const MAX_PREVIEW_LENGTH = 300;
+
 const getPreview = (html: string) => {
-  // Replace HTML tags with space, then clean up multiple spaces
   const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-  if (text.length <= 140) return text;
-  return text.substring(0, 140).trim() + '...';
+  return text.length <= MAX_PREVIEW_LENGTH 
+    ? text 
+    : text.substring(0, MAX_PREVIEW_LENGTH).trim() + '...';
 };
 
 ---
 
 <section id="prelekcje" class="bg-transparent relative py-24">
-  <div class="w-full max-w-[1200px] mx-auto px-4 md:px-8">
+  <div class="w-full max-w-300 mx-auto px-4 md:px-8">
     <Typography variant="h2" class="mb-16">Prelekcje</Typography>
-    <div class="max-w-[800px] mx-auto relative z-10">
-      <div class="absolute left-[12px] md:left-[160px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-transparent via-[#0ea5e999] to-transparent shadow-[0_0_10px_rgba(14,165,233,0.3)]"></div>
+    <div class="max-w-200 mx-auto relative z-10">
+      <div class="absolute left-3 md:left-40 top-0 bottom-0 w-0.5 bg-linear-to-b from-transparent via-[#0ea5e999] to-transparent shadow-[0_0_10px_rgba(14,165,233,0.3)]"></div>
       {
         presentations.map((pres, index) => {
           const next = presentations[index + 1];
@@ -30,24 +32,24 @@ const getPreview = (html: string) => {
 
           return (
             <div class:list={[
-              "flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-[3px] md:after:left-[151px] after:top-[2px] md:after:top-[5px] after:w-[20px] after:h-[20px] after:rounded-full after:bg-bg-base after:border-4 after:z-20",
+              "flex flex-col md:flex-row mb-12 md:mb-16 relative last:mb-0 after:content-[''] after:absolute after:left-0.75 md:after:left-37.75 after:top-0.5 md:after:top-1.25 after:w-5 after:h-5 after:rounded-full after:bg-bg-base after:border-4 after:z-20",
               pres.completed ? "after:border-emerald-500 after:shadow-[0_0_10px_rgba(16,185,129,0.5)]" : "after:border-accent"
             ]}>
               {showLine && lineClass && (
                 <span
-                  class={`absolute left-[12px] md:left-[160px] top-[12px] w-[2px] h-[calc(100%+48px)] md:h-[calc(100%+64px)] ${lineClass}`}
+                  class={`absolute left-3 md:left-40 top-3 w-0.5 h-[calc(100%+48px)] md:h-[calc(100%+64px)] ${lineClass}`}
                   aria-hidden="true"
                 ></span>
               )}
-            <div class="w-auto md:w-[160px] pr-0 md:pr-8 pl-10 md:pl-0 mb-2 md:mb-0 font-extrabold text-monday-primary font-heading text-[1.15rem] tracking-wide drop-shadow-[0_0_20px_rgba(254,191,61,0.2)]">
+            <div class="w-auto md:w-40 pr-0 md:pr-8 pl-10 md:pl-0 mb-2 md:mb-0 font-extrabold text-monday-primary font-heading text-[1.15rem] tracking-wide drop-shadow-[0_0_20px_rgba(254,191,61,0.2)]">
               {pres.date}
               <br />
               {pres.time}
             </div>
-            <GlassCard class="flex-1 ml-9 md:ml-4 p-4 md:p-8 !rounded-[20px] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] relative overflow-hidden">
+            <GlassCard class="flex-1 ml-9 md:ml-4 p-4 md:p-8 rounded-[20px]! shadow-[0_10px_30px_-10px_rgba(0,0,0,0.5)] relative overflow-hidden">
               <div class="relative z-10">
                 <div class="flex justify-between items-start gap-4 mb-3 flex-wrap">
-                  <div class="flex-1 min-w-[200px]">
+                  <div class="flex-1 min-w-50">
                     <div class="flex items-center gap-3 flex-wrap">
                       <Typography variant="h3" class="m-0">
                         {pres.title}
@@ -101,7 +103,7 @@ const getPreview = (html: string) => {
                 {pres.completed ? (
                   <details class="group mt-4">
                     <summary class="cursor-pointer text-text-muted hover:text-slate-200 select-none list-none [&::-webkit-details-marker]:hidden flex flex-col gap-2">
-                      <div class="text-sm line-clamp-2 md:line-clamp-1 group-open:hidden opacity-80 transition-opacity">
+                      <div class="text-sm line-clamp-6 md:line-clamp-4 group-open:hidden opacity-80 transition-opacity">
                         {getPreview(pres.description)}
                       </div>
                       <div class="flex items-center gap-2 text-monday-yellow hover:text-monday-yellow/80 font-semibold mt-1">

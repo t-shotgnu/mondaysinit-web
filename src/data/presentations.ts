@@ -158,8 +158,8 @@ export const presentations: Presentation[] = [
       },
     ],
     location: "s. D1.2 C-16 PWr",
-    speaker: "<strong>Kacper Pilkowski</strong> (Xebia) oraz <strong>Michał Szymczyk</strong> (WithSecure)",
+    speaker: "<strong>Kacper Piłkowski</strong> (Xebia) oraz <strong>Michał Szymczyk</strong> (WithSecure)",
     description: "Nasz cykl zakończymy Wielkim Finałem - usłyszymy aż dwie prelekcje w ramach jednych zajęć! 🚀<br /><br /><strong>Prelekcja 1 🌐📨</strong><br /><strong>\"Sync vs Async - architektura komunikacji w aplikacjach webowych\"</strong> którą przeprowadzi Kacper Pilkowski z firmy Xebia.<br />Skupimy się na tym, jak serwisy komunikują się ze sobą, omówimy komunikację synchroniczną (REST, gRPC) oraz asynchroniczną (kolejki, event broker) oraz pokażemy trade-offy obu podejść.<br /><br /><strong>Prelekcja 2 🛡️👾</strong><br /><strong>\"Miliony sygnałów, jeden atak: Big Data w cyberbezpieczeństwie\"</strong> którą przeprowadzi Michał Szymczyk z firmy WithSecure.<br />Ta prelekcja pokaże co wspólnego mają dane z bezpieczeństwem, czyli jak analiza ogromnych ilości danych i zdarzeń bezpieczeństwa pomaga wykrywać cyberataki oraz reagować na zagrożenia w czasie rzeczywistym.<br /><br />🍕 <strong>Na uczestników warsztatów czeka darmowa pizza!</strong>",
-    completed: false,
+    completed: true,
   },
 ];
